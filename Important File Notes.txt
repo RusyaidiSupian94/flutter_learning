@@ -1,0 +1,14 @@
+Step create devcontainer
+1 - Create folder with name ".devcontainer"
+2 - Create in folder ".devcontainer" file name "devcontainer.json", "Dockerfile" and "post-create.sh"
+3 - Press "Ctrl + Shift + P", then search "Codespace: Rebuild Container"
+
+Step To Add Program in api folder
+1 - Check .Net version using command terminal, type "dotnet --version" and "dotnet --info"
+2 - Now go to root repos using command "cd /workspace/repo_name"
+3 - Create folder placement api using command "mkdir folder_name"
+4 - Go to assign folder using command "cd folder_name"
+5 - Run command "dotnet new webapi"
+6 - Run command "dotnet restore" and "dotnet build"
+7 - To run webapi is using command "dotnet run"
+8 - The on url add "/weatherforecast" then it will show json "weatherforecast"
