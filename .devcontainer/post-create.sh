@@ -1,32 +1,37 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-echo "Checking .NET..."
-dotnet --version
-
-echo "Checking Flutter..."
-flutter --version
-
-echo "Restoring .NET dependencies..."
-while IFS= read -r -d '' project; do
-  dotnet restore "$project"
-done < <(find api -type f -name '*.csproj' -print0)
-
-echo "Restoring Flutter dependencies..."
-if [ -f app/pubspec.yaml ]; then
-  cd app
-  flutter pub get
-fi
+#!/bin/bash
 
 set -e
 
-sudo apt-get update
-sudo apt-get install -y git-lfs
+echo "Starting report_app Web setup..."
+
+# Git LFS
 git lfs install
+
+# Flutter
+flutter --version
+
+if [ -f "app/pubspec.yaml" ]; then
+    echo "Installing Flutter packages..."
+
+    cd app
+    flutter pub get
+    cd ..
+fi
+
+# .NET
+dotnet --version
+
+if [ -d "api" ]; then
+
+    API_PROJECT=$(find api -maxdepth 3 -name "*.csproj" -print -quit)
+
+    if [ -n "$API_PROJECT" ]; then
+        dotnet restore "$API_PROJECT"
+    fi
+
+fi
 
 # PostgreSQL client
 psql --version
 
 echo "Web development environment ready!"
-
-echo "Setup completed."
