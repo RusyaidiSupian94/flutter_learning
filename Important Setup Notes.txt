@@ -23,3 +23,18 @@ Step To Add
 7 - Run command "flutter create ."
 8 - Run command "flutter run -d web-server --web-port 8080"
 9 - Run command "flutter build web"
+
+Setup Database
+1 - Go to "https://supabase.com/dashboard"
+2 - Login with github
+3 - Add new project in supabase
+4 - After finish, click back on project and find the button with name "connect"
+5 - Click on it, then find tab for "connection string"
+6 - For connection method, choose "session pooler"
+7 - Copy connection string example:
+postgresql://postgres.pdykcdbckvghcsfyhjly:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres
+change [YOUR-PASSWORD] to real possword you create at project
+8 - Add to the github codespace, open repository then click "settings". find "secrect and variable" then click on "codespace"
+9 - Add name - db and secrect is connection string from supabase
+10 - Need restart the codespace
+
