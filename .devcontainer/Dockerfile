@@ -1,19 +1,35 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:2-10.0
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV DOTNET_NOLOGO=1
 
-USER root
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-       git curl ca-certificates unzip xz-utils zip libglu1-mesa \
+# Install development dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    unzip \
+    zip \
+    git \
+    git-lfs \
+    jq \
+    ca-certificates \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Flutter stable SDK
+# Install .NET 10
+RUN apt-get update && apt-get install -y dotnet-sdk-10.0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Flutter stable
 RUN git clone --depth 1 --branch stable \
-    https://github.com/flutter/flutter.git /opt/flutter \
-    && chown -R vscode:vscode /opt/flutter
+    https://github.com/flutter/flutter.git /opt/flutter
 
-ENV PATH="/opt/flutter/bin:${PATH}"
+ENV FLUTTER_HOME=/opt/flutter
+ENV PATH="${FLUTTER_HOME}/bin:${PATH}"
 
-USER vscode
+# Enable Flutter Web
+RUN git config --system --add safe.directory /opt/flutter \
+    && flutter config --no-analytics \
+    && flutter config --enable-web \
+    && flutter precache --web
 
-RUN flutter precache --web
+RUN chown -R vscode:vscode /opt/flutter

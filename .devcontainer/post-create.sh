@@ -24,4 +24,9 @@ sudo apt-get update
 sudo apt-get install -y git-lfs
 git lfs install
 
+# PostgreSQL client
+psql --version
+
+echo "Web development environment ready!"
+
 echo "Setup completed."
