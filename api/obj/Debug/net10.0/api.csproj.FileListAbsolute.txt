@@ -32,3 +32,8 @@
 /workspaces/flutter_learning/api/obj/Debug/net10.0/api.pdb
 /workspaces/flutter_learning/api/obj/Debug/net10.0/api.genruntimeconfig.cache
 /workspaces/flutter_learning/api/obj/Debug/net10.0/ref/api.dll
+/workspaces/flutter_learning/api/bin/Debug/net10.0/Microsoft.EntityFrameworkCore.dll
+/workspaces/flutter_learning/api/bin/Debug/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/workspaces/flutter_learning/api/bin/Debug/net10.0/Microsoft.EntityFrameworkCore.Relational.dll
+/workspaces/flutter_learning/api/bin/Debug/net10.0/Npgsql.dll
+/workspaces/flutter_learning/api/bin/Debug/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
