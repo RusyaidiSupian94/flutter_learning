@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'login_page.dart';
+
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
+
+  Future<void> _logout(BuildContext context) async {
+    try {
+      await Supabase.instance.client.auth.signOut();
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Logout successful!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (error) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Unable to logout'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +33,9 @@ class Homepage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Report App'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-            const Icon(
-              Icons.cloud_done,
-              color: Colors.green,
-              size: 60,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              user == null ? 'No user logged in yet.' : 'User : ${user.email ?? user.id}',
-            )
-          ]
-        ),
+        actions:[
+          if (user == null)
+        ]
       ),
     );
   }
