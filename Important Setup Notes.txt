@@ -37,4 +37,7 @@ change [YOUR-PASSWORD] to real possword you create at project
 8 - Add to the github codespace, open repository then click "settings". find "secrect and variable" then click on "codespace"
 9 - Add name - db and secrect is connection string from supabase
 10 - Need restart the codespace
+11 - Need to run command "echo ${dbname:+Secret available}", if show secret available. if not show need to check "Settings → Secrets and variables → Codespaces"
+12 - Need run command "PGSSLMODE=require psql "$SUPABASE_DB_URL" -c "select current_database(), current_user;""
+13 - 
 
