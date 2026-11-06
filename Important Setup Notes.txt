@@ -47,4 +47,9 @@ Check Connection DB
 4 - For stable version is 10, use command "dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.3", the run command "dotnet restore"
 5 - To check the package added or not, run command "cat api.csproj", in ItemGroup, it will add package Npgsql
 
+Connect Supabase with Flutter
+1 - Enter app folder then run command "flutter pub add supabase_flutter" and "flutter pub get"
+2 - Open Supabase dashboard -> choose project -> find project settings -> API Keys -> find section Publishable then copy key with sb_publishable
+3 - Find the Project URL at dashboard
+
 
