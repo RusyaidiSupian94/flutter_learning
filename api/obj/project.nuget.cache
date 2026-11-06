@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "KyDY5Spy7C0=",
+  "dgSpecHash": "DW691RCyAmU=",
   "success": true,
   "projectFilePath": "/workspaces/flutter_learning/api/api.csproj",
   "expectedPackageFiles": [
     "/home/vscode/.nuget/packages/microsoft.aspnetcore.openapi/10.0.14/microsoft.aspnetcore.openapi.10.0.14.nupkg.sha512",
-    "/home/vscode/.nuget/packages/microsoft.openapi/2.12.2/microsoft.openapi.2.12.2.nupkg.sha512"
+    "/home/vscode/.nuget/packages/microsoft.entityframeworkcore/10.0.4/microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.4/microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.4/microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.4/microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
+    "/home/vscode/.nuget/packages/microsoft.openapi/2.12.2/microsoft.openapi.2.12.2.nupkg.sha512",
+    "/home/vscode/.nuget/packages/npgsql/10.0.3/npgsql.10.0.3.nupkg.sha512",
+    "/home/vscode/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.3/npgsql.entityframeworkcore.postgresql.10.0.3.nupkg.sha512"
   ],
   "logs": []
 }

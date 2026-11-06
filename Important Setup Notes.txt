@@ -39,5 +39,12 @@ change [YOUR-PASSWORD] to real possword you create at project
 10 - Need restart the codespace
 11 - Need to run command "echo ${dbname:+Secret available}", if show secret available. if not show need to check "Settings → Secrets and variables → Codespaces"
 12 - Need run command "PGSSLMODE=require psql "$SUPABASE_DB_URL" -c "select current_database(), current_user;""
-13 - 
+
+Check Connection DB
+1 - Run command "cd /workspaces/folder_name", then "find api -maxdepth 3 -name "*.csproj" -print", then "find api -maxdepth 2 -type f | sort | head -80"
+2 - Run commend "cat api/api.csproj", then "sed -n '1,240p' api/Program.cs" to see the output weatherforecast
+3 - Go to api folder, the run command "dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL" to add npgsql in webapi
+4 - For stable version is 10, use command "dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 10.0.3", the run command "dotnet restore"
+5 - To check the package added or not, run command "cat api.csproj", in ItemGroup, it will add package Npgsql
+
 
