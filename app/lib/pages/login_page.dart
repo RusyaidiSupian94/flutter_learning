@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,53 +28,73 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isLoading = true);
-
     try {
-      await Supabase.instance.client.auth.signInWithPassword(
+      final response = await Supabase.instance.client.auth.signInWithPassword(
         email: _emailController.text.trim().toLowerCase(),
         password: _passwordController.text,
       );
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login successful!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      Navigator.of(context).pop();
+      final user = response.user;
+      if (user == null || user.emailConfirmedAt == null) {
+        await Supabase.instance.client.auth.signOut();
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please verify your email before logging in.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        return;
+      }
     } on AuthException catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(error.message), backgroundColor: Colors.red),
       );
     } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Login failed. Please try again: $error'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+    finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
     }
   }
 
-  Future<void> _loginWithGoogle() async {
-    try {
-      await Supabase.instance.client.auth.signInWithOAuth(
-        OAuthProvider.google,
-        redirectTo: Uri.base.origin,
-      );
-    } on AuthException catch (error) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.message), backgroundColor: Colors.red),
-      );
-    } catch (error) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Unable to sign in with Google. Please try again.'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
+  ///Future<> _loginWithGoogle() async {
+  ///  if (_isLoading) return;
+  ///  setState(() => _isLoading = true);
+  ///  try {
+  ///    await Supabase.instance.client.auth.signInWithOAuth(
+  ///      OAuthProvider.google,
+  ///      redirectTo: Uri.base.origin,
+  ///    );
+  ///  } on AuthException catch (error) {
+  ///    if (!mounted) return;
+  ///    ScaffoldMessenger.of(context).showSnackBar(
+  ///      SnackBar(content: Text(error.message), backgroundColor: Colors.red),
+  ///    );
+  ///  } catch (error) {
+  ///    if (!mounted) return;
+  ///    ScaffoldMessenger.of(context).showSnackBar(
+  ///      const SnackBar(
+  ///        content: Text('Unable to sign in with Google. Please try again.'),
+  ///        backgroundColor: Colors.red,
+  ///      ),
+  ///    );
+  ///  }
+  ///  finally {
+  ///    if (mounted) {
+  ///      setState(() => _isLoading = false);
+  ///    }
+  ///  }
+  ///}
 
   @override
   Widget build(BuildContext context) {
@@ -181,15 +202,15 @@ class _LoginPageState extends State<LoginPage> {
                         : const Text('Sign In', style: TextStyle(fontSize: 16)),
                   ),
                   const SizedBox(height: 20),
-                  OutlinedButton.icon(
-                    onPressed: _isLoading ? null : _loginWithGoogle,
-                    icon: const Icon(Icons.g_mobiledata, size: 30),
-                    label: const Text('Sign in with Google'),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
+                  ///OutlinedButton.icon(
+                  ///  onPressed: _isLoading ? null : _loginWithGoogle,
+                  ///  icon: const Icon(Icons.g_mobiledata, size: 30),
+                  ///  label: const Text('Sign in with Google'),
+                  ///  style: OutlinedButton.styleFrom(
+                  ///    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ///  ),
+                  ///),
+                  ///const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

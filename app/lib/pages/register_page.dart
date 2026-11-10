@@ -34,10 +34,10 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => _isLoading = true);
 
     try {
-      final response =
-          await Supabase.instance.client.auth.signUp(
+      final response = await Supabase.instance.client.auth.signUp(
         email: _emailController.text.trim(),
         password: _passwordController.text,
+        emailRedirectTo: Uri.base.origin,
       );
 
       if (!mounted) return;
