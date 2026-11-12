@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'register_page.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -46,6 +47,12 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.of(context).popUntil((route) => route.isFirst);
         return;
       }
+      if (!mounted) return;
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const Homepage()),
+        (route) => false,
+      );
     } on AuthException catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -59,8 +66,7 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.red,
         ),
       );
-    }
-    finally {
+    } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
@@ -202,6 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                         : const Text('Sign In', style: TextStyle(fontSize: 16)),
                   ),
                   const SizedBox(height: 20),
+
                   ///OutlinedButton.icon(
                   ///  onPressed: _isLoading ? null : _loginWithGoogle,
                   ///  icon: const Icon(Icons.g_mobiledata, size: 30),
