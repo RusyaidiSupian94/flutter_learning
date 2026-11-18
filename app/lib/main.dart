@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'config/supabase_config.dart';
-import 'pages/home_page.dart';
+//import 'pages/home_page.dart';
+//import 'test_page/footer_page.dart';
+import 'test_page/test_home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +30,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const Homepage(),
+      //home: const Homepage(),
+      home: const TestHomePage(),
     );
   }
 }
-
