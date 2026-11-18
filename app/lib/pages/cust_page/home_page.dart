@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'login_page.dart';
-import 'register_page.dart';
+import '../auth_pages/login_page.dart';
+import '../auth_pages/register_page.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});

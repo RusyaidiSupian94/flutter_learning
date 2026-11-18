@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'header_page.dart';
 import 'footer_page.dart';
 
 class TestHomePage extends StatelessWidget {
@@ -9,11 +11,8 @@ class TestHomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(
-            child: Center(
-              child: Text('TestHomePage'),
-            ),
-          ),
+          const HeaderPage(),
+          Expanded(child: Center(child: Text('TestHomePage'))),
           const FooterPage(),
         ],
       ),
